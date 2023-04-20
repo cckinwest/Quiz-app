@@ -1,0 +1,29 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#startPanel {
+    text-align: center;
+}
+
+#headPanel > * {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.option {
+    margin: 2px;
+}
+
+#questionCard {
+    padding: 20px;
+    border-style: solid;
+    border-color: #B6C7D6;
+    border-radius: 20px;
+    background-color: #EAF0F6;
+}
