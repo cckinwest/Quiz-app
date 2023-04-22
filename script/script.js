@@ -55,7 +55,9 @@ var start = document.getElementById("start");
 var qCard = document.getElementById("questionCard");
 var headPanel = document.getElementById("headPanel");
 var nameForm = document.getElementById("nameForm");
+var resultsPanel = document.getElementById("resultsPanel");
 var resultsTable = document.getElementById("resultsTable");
+var clear = document.getElementById("clear");
 
 var message = document.getElementById("message");
 var text = document.getElementById("text");
@@ -76,10 +78,11 @@ var MCQOptions = document.getElementsByClassName("option");
 headPanel.setAttribute("style", "display: none;");
 qCard.setAttribute("style", "display: none;");
 nameForm.setAttribute("style", "display: none;");
-resultsTable.setAttribute("style", "display: none;");
+resultsPanel.setAttribute("style", "display: none;");
 
 start.addEventListener("click", startGame);
 submit.addEventListener("click", submitData);
+clear.addEventListener("click", clearRecord);
 
 function convertMCQ(question) {
   var options = question.incorrect.concat(question.correct);
@@ -153,6 +156,23 @@ function startGame() {
     highestScore = localStorage.getItem("highest");
   }
 
+  function gameOver() {
+    for (var i = 0; i < MCQOptions.length; i++) {
+      MCQOptions[i].disabled = true;
+    }
+
+    if (score > localStorage.getItem("highest")) {
+      localStorage.setItem("highest", score);
+    }
+
+    const myTimeout = setTimeout(() => {
+      headPanel.setAttribute("style", "display: none;");
+      qCard.setAttribute("style", "display: none;");
+      summary.textContent = `Your score is ${score}.`;
+      nameForm.setAttribute("style", "display: block;");
+    }, 2000);
+  }
+
   generateQuestions().then((questions) => {
     clearInterval(myLoading);
 
@@ -167,6 +187,17 @@ function startGame() {
 
     var question = render(questions[index]);
 
+    const myTimer = setInterval(() => {
+      if (timeLeft > 0) {
+        timer.textContent = `Time (seconds): ${timeLeft}`;
+        timeLeft--;
+      } else {
+        timer.textContent = `Time is up!`;
+        gameOver();
+        clearInterval(myTimer);
+      }
+    }, 1000);
+
     for (var i = 0; i < MCQOptions.length; i++) {
       MCQOptions[i].addEventListener("click", (event) => {
         for (var i = 0; i < MCQOptions.length; i++) {
@@ -179,55 +210,25 @@ function startGame() {
         if (answer === question.correct) {
           result.textContent = "✔";
           score++;
-          if (score > highestScore) {
-            highestScore = score;
-            highest.textContent = `Highest Score: ${highestScore}`;
-          }
           timeLeft += 1;
         } else {
           result.textContent = "✖";
           score--;
-          timeLeft -= 5;
+          timeLeft -= 3;
         }
 
         scoreboard.textContent = `Score: ${score}`;
 
-        if (index < questions.length - 1 && timeLeft > 0) {
+        if (index < questions.length - 1) {
           index++;
           const myTimeout = setTimeout(() => {
             question = render(questions[index]);
           }, 500);
         } else {
-          if (score > localStorage.getItem("highest")) {
-            localStorage.setItem("highest", score);
-          }
-
-          for (var i = 0; i < MCQOptions.length; i++) {
-            MCQOptions[i].disabled = true;
-          }
-
-          const myTimeout = setTimeout(() => {
-            headPanel.setAttribute("style", "display: none;");
-            qCard.setAttribute("style", "display: none;");
-            summary.textContent = `Your score is ${score}.`;
-            nameForm.setAttribute("style", "display: block;");
-          }, 2000);
+          gameOver();
         }
       });
     }
-
-    const myTimer = setInterval(() => {
-      if (timeLeft > 0) {
-        timer.textContent = `Time (seconds): ${timeLeft}`;
-        timeLeft--;
-      } else {
-        timer.textContent = `Time is up!`;
-      }
-
-      if (timeLeft < 0 || index === questions.length - 1) {
-        clearInterval(myTimer);
-      }
-    }, 1000);
   });
 }
 
@@ -261,5 +262,10 @@ function submitData() {
   }
 
   nameForm.setAttribute("style", "display: none;");
-  resultsTable.setAttribute("style", "display: block;");
+  resultsPanel.setAttribute("style", "display: block;");
+}
+
+function clearRecord() {
+  localStorage.removeItem("record");
+  resultsTable.innerHTML = "<tr><th>Name</th><th>Score</th><th>Date</th></tr>";
 }
