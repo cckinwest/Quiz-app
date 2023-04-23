@@ -1,6 +1,6 @@
 # Quiz-app
 
-[link](cckinwest.github.io/Quiz-app/index.html)
+[link](https://cckinwest.github.io/Quiz-app/index.html)
 
 ## Purpose
 
