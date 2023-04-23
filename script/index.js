@@ -59,6 +59,6 @@ function startGame() {
   generateQuestions().then((questions) => {
     clearInterval(myLoading);
     localStorage.setItem("questions", JSON.stringify(questions));
-    location.href = "game.html";
+    location.href = "./pages/game.html";
   });
 }
