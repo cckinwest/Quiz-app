@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <section id="headPanel">
+        <h5 id="timer"></h5>
+        <h5 id="scoreboard"></h5>
+        <h5 id="highestScore"></h5>
+    </section>
+
+    <section id="questionCard">
+        <h3 id="text"></h3>
+        <div id="optionsPanel">
+            <div id="optionA">
+                <label for="A">A. </label><button class="option" id="A"></button>
+                <span class="result"></span>
+            </div>
+            <div id="optionB">
+                <label for="B">B. </label><button class="option" id="B"></button>
+                <span class="result"></span>
+            </div>
+            <div id="optionC">
+                <label for="C">C. </label><button class="option" id="C"></button>
+                <span class="result"></span>
+            </div>
+            <div id="optionD">
+                <label for="D">D. </label><button class="option" id="D"></button>
+                <span class="result"></span>
+            </div>
+        </div>
+    </section>
+    <script src="./script/game.js"></script>
+</body>
+</html>

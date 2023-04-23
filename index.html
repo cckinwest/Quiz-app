@@ -4,61 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <title>Quiz-app</title>
 </head>
 <body>
     <section id="startPanel">
         <p id="message">In this quiz, try your best to answer within the time limit.</p>
         <button id="start">Start the quiz</button>        
     </section>
-    
-    <section id="headPanel">
-        <h5 id="timer"></h5>
-        <h5 id="scoreboard"></h5>
-        <h5 id="highest"></h5>
-    </section>
-
-    <section id="questionCard">
-        <h3 id="text"></h3>
-        <div id="optionsPanel">
-            <div id="optionA">
-                <label for="A">A. </label><button class="option" id="A"></button>
-                <span class="result"></span>
-            </div>
-            <div id="optionB">
-                <label for="B">B. </label><button class="option" id="B"></button>
-                <span class="result"></span>
-            </div>
-            <div id="optionC">
-                <label for="C">C. </label><button class="option" id="C"></button>
-                <span class="result"></span>
-            </div>
-            <div id="optionD">
-                <label for="D">D. </label><button class="option" id="D"></button>
-                <span class="result"></span>
-            </div>
-        </div>
-        <p id="result"></p>
-    </section>
-
-    <section id="nameForm">
-        <p id="summary"></p>
-        <input id="playerName" placeholder="Enter your name here."></input>
-        <button id="submit">Submit</button>
-    </section>
-
-    <section id="resultsPanel">
-        <table id="resultsTable">
-            <tr>
-                <th>Name</th>
-                <th>Score</th>
-                <th>Date</th>
-            </tr>
-        </table>
-        <button id="clear">Clear record</button>
-    </section>
-
-    <script src="./script/script.js"></script>
+    <script src="./script/index.js"></script>
 </body>
 </html>
