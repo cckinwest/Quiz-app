@@ -4,7 +4,7 @@ var back = document.getElementById("back");
 
 clear.addEventListener("click", clearRecord);
 back.addEventListener("click", () => {
-  location.href = "start.html";
+  location.href = "index.html";
 });
 
 var record = [];
