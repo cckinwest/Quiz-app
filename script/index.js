@@ -33,9 +33,9 @@ async function generateQuestions() {
       text: data[i].question.text,
       correct: data[i].correctAnswer,
       incorrect: data[i].incorrectAnswers,
-    };
+    }; //set the object of each question
 
-    questions.push(question);
+    questions.push(question); //store each question object into an array
   }
 
   return questions;
@@ -51,14 +51,15 @@ function startGame() {
     count++;
 
     if (count === 5) {
+      //when the number of dots is 5, then go back to start again
       message.textContent = "Wait a second for the game to start";
       count = 0;
     }
   }, 200);
 
   generateQuestions().then((questions) => {
-    clearInterval(myLoading);
-    localStorage.setItem("questions", JSON.stringify(questions));
-    location.href = "game.html";
+    clearInterval(myLoading); //when the question is loaded from the api, the loading effect is stopped
+    localStorage.setItem("questions", JSON.stringify(questions)); //convert the questions into string so to store in the localStorage
+    location.href = "game.html"; //After the questions are stored, direct to the next page
   });
 }

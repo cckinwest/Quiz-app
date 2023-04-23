@@ -9,6 +9,7 @@ var score = localStorage.getItem("score");
 var record = [];
 
 if (localStorage.getItem("record")) {
+  //when there are previous records, load them
   record = JSON.parse(localStorage.getItem("record")).slice();
 }
 
@@ -16,6 +17,7 @@ summary.textContent = `Your score is ${score}. Please submit your score.`;
 submit.disabled = false;
 submit.addEventListener("click", submitData);
 noSubmit.addEventListener("click", () => {
+  //click this button to go straight to the final page without saving
   location.href = "scoreboard.html";
 });
 
@@ -28,13 +30,14 @@ function submitData() {
     name = playerName.value;
   }
 
+  //create the individual record when submit
   var individualRecord = {
     name: name,
     score: score,
     date: date,
   };
 
-  record.push(individualRecord);
+  record.push(individualRecord); //act the individual record
   localStorage.setItem("record", JSON.stringify(record));
 
   location.href = "scoreboard.html";
